@@ -55,6 +55,7 @@ int main(int argc, char** argv)
 
 	rtabmap_ros::GuiWrapper * gui = new rtabmap_ros::GuiWrapper(argc, argv);
 
+#ifndef _WIN32
 	// Catch ctrl-c to close the gui
 	// (Place this after QApplication's constructor)
 	struct sigaction sigIntHandler;
@@ -62,6 +63,7 @@ int main(int argc, char** argv)
 	sigemptyset(&sigIntHandler.sa_mask);
 	sigIntHandler.sa_flags = 0;
 	sigaction(SIGINT, &sigIntHandler, NULL);
+#endif
 
 	// Here start the ROS events loop
 	spinner = new ros::AsyncSpinner(1); // Use 1 thread
